@@ -380,37 +380,45 @@ git push`, id: 'git-commit' }
               }`}
             >
               {/* Step Header */}
-              <button
-                onClick={() => toggleStep(step.num)}
-                className="w-full p-6 flex items-center justify-between hover:bg-slate-700/50 transition"
+              <div
+                className="w-full p-6"
               >
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <button
+                      onClick={() => toggleComplete(step.num)}
+                      className="flex-shrink-0 hover:bg-slate-700/50 p-2 rounded-full transition"
+                    >
+                      {completedSteps[step.num] ? (
+                        <CheckCircle2 size={32} className="text-green-500" />
+                      ) : (
+                        <Circle size={32} className="text-slate-500 hover:text-slate-400" />
+                      )}
+                    </button>
+                    <button
+                      onClick={() => toggleStep(step.num)}
+                      className="flex-1 text-left hover:bg-slate-700/50 p-2 rounded transition"
+                    >
+                      <div>
+                        <h2 className={`text-xl font-bold ${completedSteps[step.num] ? 'text-green-400 line-through' : 'text-white'}`}>
+                          Step {step.num}: {step.title}
+                        </h2>
+                        <p className="text-sm text-slate-400">⏱️ {step.duration}</p>
+                      </div>
+                    </button>
+                  </div>
                   <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleComplete(step.num);
-                    }}
-                    className="flex-shrink-0"
+                    onClick={() => toggleStep(step.num)}
+                    className="flex-shrink-0 hover:bg-slate-700/50 p-2 rounded-full transition"
                   >
-                    {completedSteps[step.num] ? (
-                      <CheckCircle2 size={32} className="text-green-500" />
+                    {expandedSteps[step.num] ? (
+                      <ChevronUp className="text-slate-400" />
                     ) : (
-                      <Circle size={32} className="text-slate-500 hover:text-slate-400" />
+                      <ChevronDown className="text-slate-400" />
                     )}
                   </button>
-                  <div className="text-left">
-                    <h2 className={`text-xl font-bold ${completedSteps[step.num] ? 'text-green-400 line-through' : 'text-white'}`}>
-                      Step {step.num}: {step.title}
-                    </h2>
-                    <p className="text-sm text-slate-400">⏱️ {step.duration}</p>
-                  </div>
                 </div>
-                {expandedSteps[step.num] ? (
-                  <ChevronUp className="text-slate-400" />
-                ) : (
-                  <ChevronDown className="text-slate-400" />
-                )}
-              </button>
+              </div>
 
               {/* Step Content */}
               {expandedSteps[step.num] && (
