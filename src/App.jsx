@@ -39,8 +39,7 @@ export default function FlyioSetupGuide() {
       num: 1,
       title: 'Create Neon Database',
       duration: '2 min',
-      videoId: 'neon-setup-video',
-      videoPlaceholder: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      videoSrc: '/neon-setup.mp4',
       instructions: [
         {
           text: 'Go to neon.com and sign up (free account, no credit card)',
@@ -200,7 +199,7 @@ export default function FlyioSetupGuide() {
             'Change: app = "swarm-relay" to a unique app name (e.g., "swarm-relay-john" or "my-nostr-relay")',
             'Change: RELAY_NAME = "My Swarm Relay" to your relay\'s display name',
             'Change: RELAY_DESCRIPTION to describe your relay (what is it for?)',
-            'Optional: Change RELAY_PUBKEY if you want a different pubkey (or keep the default)',
+            'Mandatory: Change RELAY_PUBKEY if you want a different pubkey (or keep the default)',
             'Leave all other values as they are'
           ]
         },
@@ -408,21 +407,32 @@ git push`, id: 'git-commit' }
               {/* Step Content */}
               {expandedSteps[step.num] && (
                 <div className="border-t border-slate-700 px-6 py-6 space-y-8">
-                  {/* Video Section - Only show for steps with videoId */}
-                  {step.videoId && step.num !== 2 && step.num !== 3 && (
+                  {/* Video Section - Show for steps with videoSrc or videoId */}
+                  {(step.videoSrc || (step.videoId && step.num !== 2 && step.num !== 3 && step.num !== 5)) && (
                     <div className="space-y-2">
                       <h3 className="text-lg font-bold text-white flex items-center space-x-2">
                         <Play size={20} />
                         <span>Video Tutorial</span>
                       </h3>
                       <div className="w-full bg-slate-900 rounded-lg overflow-hidden aspect-video">
-                        <div className="w-full h-full bg-slate-700 flex items-center justify-center">
-                          <div className="text-center">
-                            <Play size={48} className="text-slate-500 mx-auto mb-2" />
-                            <p className="text-slate-400">Video embed placeholder</p>
-                            <p className="text-xs text-slate-500 mt-1">Replace videoId in code with your YouTube video ID</p>
+                        {step.videoSrc ? (
+                          <video
+                            src={step.videoSrc}
+                            controls
+                            className="w-full h-full"
+                            poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='%23334155'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23cbd5e1' font-family='sans-serif' font-size='24'%3ELoading video...%3C/text%3E%3C/svg%3E"
+                          >
+                            Your browser does not support the video tag.
+                          </video>
+                        ) : (
+                          <div className="w-full h-full bg-slate-700 flex items-center justify-center">
+                            <div className="text-center">
+                              <Play size={48} className="text-slate-500 mx-auto mb-2" />
+                              <p className="text-slate-400">Video embed placeholder</p>
+                              <p className="text-xs text-slate-500 mt-1">Replace videoId in code with your YouTube video ID</p>
+                            </div>
                           </div>
-                        </div>
+                        )}
                       </div>
                       <p className="text-xs text-slate-400">
                         💡 Tip: Watch the video first, then follow the text instructions below
