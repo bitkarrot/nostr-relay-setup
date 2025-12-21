@@ -2,8 +2,6 @@
 
 **An interactive step-by-step guide for deploying a fully functional Nostr relay for $0/month forever.**
 
-🔗 **Live Guide:** [nostr-relay-setup.pages.dev](https://bitkarrot.github.io/nostr-relay-setup/) 
-
 ---
 
 ## What is This?
@@ -20,7 +18,7 @@ By the end of this guide, you'll have:
 
 ## Quick Start
 
-1. **Visit the live guide:** [Click here to get started](https://bitkarrot.github.io/nostr-relay-setup/)
+1. **Visit the live guide:** 
 2. **Follow the 7 steps** (takes ~20-30 minutes total)
 3. **Test with Jumble.social** or any Nostr client
 4. **Share your relay URL with friends!**
@@ -67,9 +65,6 @@ By the end of this guide, you'll have:
 ---
 
 ## How to Use This Repository
-
-### For Users
-Just visit the [live guide](https://bitkarrot.github.io/nostr-relay-setup/) and follow along!
 
 ### For Developers
 If you want to contribute or modify the guide:
@@ -231,4 +226,3 @@ Future additions to this guide:
 
 **Questions?** Open an issue or ask in the Nostr community!
 
-**Ready to start?** [Go to the interactive guide →](https://your-username.github.io/nostr-relay-setup/)
