@@ -15,13 +15,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/bitkarrot/nostr-relay-setup/issues"
   },
   "homepage": "https://github.com/bitkarrot/nostr-relay-setup#readme",
   "dependencies": {
-    "lucide-react": "^latest",
+    "lucide-react": "latest",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },
