@@ -1,0 +1,32 @@
+{
+  "name": "nostr-relay-setup",
+  "version": "1.0.0",
+  "description": "**An interactive step-by-step guide for deploying a fully functional Nostr relay for $0/month forever.**",
+"type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitkarrot/nostr-relay-setup.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/bitkarrot/nostr-relay-setup/issues"
+  },
+  "homepage": "https://github.com/bitkarrot/nostr-relay-setup#readme",
+  "dependencies": {
+    "lucide-react": "^latest",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.2",
+    "vite": "^7.3.0"
+  }
+}
