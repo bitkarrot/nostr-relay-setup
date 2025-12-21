@@ -3,12 +3,12 @@ import { CheckCircle2, Circle, ChevronDown, ChevronUp, Copy, Play } from 'lucide
 
 export default function FlyioSetupGuide() {
   const [expandedSteps, setExpandedSteps] = useState({
-    1: true,
+    0: true,
+    1: false,
     2: false,
     3: false,
     4: false,
     5: false,
-    6: false,
   });
   
   const [completedSteps, setCompletedSteps] = useState({});
@@ -36,15 +36,113 @@ export default function FlyioSetupGuide() {
 
   const steps = [
     {
+      num: 0,
+      title: 'Overview & Prerequisites',
+      duration: '3 min',
+      instructions: [
+        {
+          text: 'Architecture Overview',
+          substeps: [
+            'We will deploy a Nostr relay that stores events in a Neon PostgreSQL database',
+            'Fly.io will host your relay application code (running 24/7 for free)',
+            'Neon DB will handle all data storage (free tier includes enough for personal use)',
+            'Your relay will be accessible via WebSocket: wss://your-app-name.fly.dev'
+          ]
+        },
+        {
+          text: 'System Architecture Diagram',
+          substeps: [
+            'Below shows how your Nostr relay will be structured',
+            'Nostr clients connect to your relay on Fly.io',
+            'Your relay stores and retrieves data from Neon PostgreSQL'
+          ],
+          diagram: (
+            <div className="bg-slate-900 rounded-lg p-6 border border-slate-600">
+              <div className="flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-8">
+                {/* Nostr Clients */}
+                <div className="text-center">
+                  <div className="bg-blue-600 rounded-lg p-4 mb-2">
+                    <div className="text-white text-sm font-semibold">Nostr Clients</div>
+                    <div className="text-blue-100 text-xs">
+                      <a href="https://jumble.social" target="_blank" rel="noopener noreferrer" className="hover:text-white underline">Jumble.social</a>,{' '}
+                      <a href="https://iris.to" target="_blank" rel="noopener noreferrer" className="hover:text-white underline">Iris.to</a>,{' '}
+                      <span>Amethyst</span>, <span>Primal</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Arrow */}
+                <div className="text-blue-400 text-2xl hidden md:block">⇄</div>
+                <div className="text-blue-400 text-xl md:hidden">⇅</div>
+
+                {/* Fly.io Relay */}
+                <div className="text-center">
+                  <div className="bg-purple-600 rounded-lg p-4 mb-2">
+                    <div className="text-white text-sm font-semibold">
+                      <a href="https://fly.io" target="_blank" rel="noopener noreferrer" className="hover:text-purple-100 underline">Fly.io</a>
+                    </div>
+                    <div className="text-purple-100 text-xs">Nostr Relay Code</div>
+                    <div className="text-purple-100 text-xs">wss://your-app.fly.dev</div>
+                  </div>
+                  <div className="text-purple-400 text-xs">24/7 Hosting • Free Tier</div>
+                </div>
+
+                {/* Arrow */}
+                <div className="text-purple-400 text-2xl hidden md:block">⇄</div>
+                <div className="text-purple-400 text-xl md:hidden">⇅</div>
+
+                {/* Neon Database */}
+                <div className="text-center">
+                  <div className="bg-green-600 rounded-lg p-4 mb-2">
+                    <div className="text-white text-sm font-semibold">
+                      <a href="https://neon.tech" target="_blank" rel="noopener noreferrer" className="hover:text-green-100 underline">Neon</a>
+                    </div>
+                    <div className="text-green-100 text-xs">PostgreSQL Database</div>
+                    <div className="text-green-100 text-xs">Event Storage</div>
+                  </div>
+                  <div className="text-green-400 text-xs">Free Tier • Backups Included</div>
+                </div>
+              </div>
+            </div>
+          )
+        },
+        {
+          text: 'Prerequisites - GitHub Account',
+          substeps: [
+            'You MUST have a GitHub account (free to create)',
+            'GitHub CLI is recommended but not required for this guide',
+            'If you don\'t have GitHub CLI installed, see the quickstart guide below',
+            'GitHub CLI makes cloning and pushing easier, but you can also use the web interface'
+          ],
+          copyValue: { label: 'GitHub CLI Quickstart Guide', value: 'https://docs.github.com/en/github-cli/github-cli/quickstart', id: 'github-cli-quickstart' }
+        },
+        {
+          text: 'What You\'ll Accomplish',
+          substeps: [
+            '✓ Your own private Nostr relay running 24/7',
+            '✓ Full control over your data and relay policies',
+            '✓ $0/month hosting (within free tier limits)',
+            '✓ Ability to connect any Nostr client to your relay',
+            '✓ Database backups and data persistence through Neon'
+          ]
+        }
+      ],
+      copyValues: [
+        { label: 'GitHub CLI Installation Guide', value: 'https://docs.github.com/en/cli/installation', id: 'github-cli-install' },
+        { label: 'GitHub CLI Usage Guide', value: 'https://docs.github.com/en/cli', id: 'github-cli-docs' },
+        { label: 'GitHub Signup (if needed)', value: 'https://github.com/signup', id: 'github-signup' }
+      ]
+    },
+    {
       num: 1,
       title: 'Create Neon Database',
       duration: '2 min',
       videoSrc: '/neon-setup.mp4',
       instructions: [
         {
-          text: 'Go to neon.com and sign up (free account, no credit card)',
+          text: 'Go to <a href="https://neon.com" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">neon.com</a> and sign up (free account, no credit card)',
           substeps: [
-            'Navigate to neon.com',
+            'Navigate to <a href="https://neon.com" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">neon.com</a>',
             'Click "Sign Up" in the top right',
             'Follow the signup process'
           ]
@@ -64,11 +162,9 @@ export default function FlyioSetupGuide() {
             'You\'ll see your connection string: postgresql://user:password@ep-xxx.neon.tech/dbname',
             'Click the copy icon to copy the entire connection string',
             'Paste it into a text editor - you\'ll need this in Step 6'
-          ]
+          ],
+          copyValue: { label: 'Example Neon Connection String', value: 'postgresql://user:password@ep-example.neon.tech/dbname', id: 'neon-conn' }
         }
-      ],
-      copyValues: [
-        { label: 'Example Neon Connection String', value: 'postgresql://user:password@ep-example.neon.tech/dbname', id: 'neon-conn' }
       ]
     },
     {
@@ -79,9 +175,10 @@ export default function FlyioSetupGuide() {
         {
           text: 'Navigate to the Swarm repository',
           substeps: [
-            'Go to github.com/HiveTalk/swarm',
+            'Go to <a href="https://github.com/HiveTalk/swarm" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">github.com/HiveTalk/swarm</a>',
             'You\'ll see the Swarm relay code (a khatru relay fork)'
-          ]
+          ],
+          copyValue: { label: 'Swarm Repository URL', value: 'https://github.com/HiveTalk/swarm', id: 'swarm-url' }
         },
         {
           text: 'Fork the repository to your GitHub account',
@@ -109,11 +206,11 @@ export default function FlyioSetupGuide() {
         {
           text: 'Clone your forked repository',
           substeps: [
-            'Copy the command from the copy section below',
-            'Replace YOUR_USERNAME with your actual GitHub username',
+            'Copy the command below and replace YOUR_USERNAME with your actual GitHub username',
             'Paste the command and press Enter',
             'This downloads your fork to your computer'
-          ]
+          ],
+          copyValue: { label: 'Clone Command (replace YOUR_USERNAME)', value: 'git clone https://github.com/YOUR_USERNAME/swarm.git', id: 'git-clone' }
         },
         {
           text: 'Navigate into the directory',
@@ -121,7 +218,8 @@ export default function FlyioSetupGuide() {
             'Type: cd swarm',
             'Press Enter',
             'You\'re now in the Swarm directory'
-          ]
+          ],
+          copyValue: { label: 'Navigate to directory', value: 'cd swarm', id: 'cd-swarm' }
         },
         {
           text: '(Optional) Switch to main branch if needed',
@@ -130,11 +228,6 @@ export default function FlyioSetupGuide() {
             'Press Enter'
           ]
         }
-      ],
-      copyValues: [
-        { label: 'Swarm Repository URL', value: 'https://github.com/HiveTalk/swarm', id: 'swarm-url' },
-        { label: 'Clone Command (replace YOUR_USERNAME)', value: 'git clone https://github.com/YOUR_USERNAME/swarm.git', id: 'git-clone' },
-        { label: 'Navigate to directory', value: 'cd swarm', id: 'cd-swarm' }
       ]
     },
     {
@@ -145,183 +238,212 @@ export default function FlyioSetupGuide() {
       videoPlaceholder: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
       instructions: [
         {
-          text: 'Install flyctl (Fly.io command-line tool)',
+          text: 'Install flyctl using your preferred method',
           substeps: [
-            'Go to fly.io/docs/hands-on/install-flyctl/',
-            'Follow the installation instructions for your OS (Mac, Linux, or Windows)',
-            'The installation is quick and straightforward'
+            'Mac: Run `brew install flyctl` (recommended) or visit <a href="https://fly.io/docs/hands-on/install-flyctl/" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">fly.io/docs/hands-on/install-flyctl/</a>',
+            'Windows: Run `winget install --id SuperFly.FlyCTL` or download from <a href="https://fly.io/docs/hands-on/install-flyctl/" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">fly.io/docs/hands-on/install-flyctl/</a>',
+            'Linux: Run `curl -L https://fly.io/install.sh | sh` or visit <a href="https://fly.io/docs/hands-on/install-flyctl/" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">fly.io/docs/hands-on/install-flyctl/</a>',
+            'For all systems: Follow the installation prompts and accept any permissions requested'
+          ],
+          copyValues: [
+            { label: 'Mac install (brew)', value: 'brew install flyctl', id: 'brew-install' },
+            { label: 'Windows install (winget)', value: 'winget install --id SuperFly.FlyCTL', id: 'winget-install' },
+            { label: 'Linux install (curl)', value: 'curl -L https://fly.io/install.sh | sh', id: 'curl-install' },
+            { label: 'Fly.io CLI docs', value: 'https://fly.io/docs/hands-on/install-flyctl/', id: 'flyctl-docs' }
           ]
         },
         {
-          text: 'Verify installation',
+          text: 'Verify the installation worked',
           substeps: [
-            'Open your terminal',
+            'Open a new terminal window',
             'Type: flyctl version',
             'Press Enter',
-            'You should see a version number (e.g., "0.0.x")'
-          ]
+            'You should see version output like "v2.25.0" (or similar)',
+            'If you see "command not found", restart your terminal or try again'
+          ],
+          copyValue: { label: 'Check version', value: 'flyctl version', id: 'flyctl-version' }
         },
         {
-          text: 'Log in to Fly.io',
+          text: 'Sign in to your Fly.io account',
           substeps: [
             'Type: flyctl auth login',
             'Press Enter',
-            'Your browser will open to create/verify your Fly.io account',
-            'Create a free account if you don\'t have one',
-            'Once authorized, you\'re ready to deploy!'
-          ]
+            'Your browser will automatically open to the Fly.io login page',
+            'Sign in with GitHub, Google, or create a new Fly.io account',
+            'Click "Authorize" to allow flyctl access to your account',
+            'Return to terminal - you should see "Successfully logged in as your-email@example.com"'
+          ],
+          copyValue: { label: 'Login to Fly.io', value: 'flyctl auth login', id: 'flyctl-login' }
+        },
+        {
+          text: 'Verify your authentication worked',
+          substeps: [
+            'Type: flyctl auth whoami',
+            'Press Enter',
+            'You should see your email/user information displayed',
+            'If you see any error, try `flyctl auth login` again'
+          ],
+          copyValue: { label: 'Verify login', value: 'flyctl auth whoami', id: 'flyctl-whoami' }
         }
-      ],
-      copyValues: [
-        { label: 'Check version', value: 'flyctl version', id: 'flyctl-version' },
-        { label: 'Login to Fly.io', value: 'flyctl auth login', id: 'flyctl-login' },
-        { label: 'Fly.io CLI docs', value: 'https://fly.io/docs/hands-on/install-flyctl/', id: 'flyctl-docs' }
       ]
     },
     {
       num: 4,
-      title: 'Customize fly.toml Configuration File',
-      duration: '2 min',
-      videoId: 'flytoml-customize-video',
-      videoPlaceholder: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      title: 'Configure fly.toml and Set Database Secret',
+      duration: '5 min',
       instructions: [
         {
-          text: 'Open the fly.toml file that\'s already in your cloned repo',
+          text: 'Locate and open the fly.toml configuration file',
           substeps: [
-            'In your swarm folder (from Step 2), you\'ll find a file called fly.toml',
-            'Open it with any text editor (VS Code, nano, TextEdit, etc.)',
-            'The file is already configured with defaults - you just need to customize it'
+            'Navigate to your swarm directory: `cd swarm` (if you\'re not already there)',
+            'Open the fly.toml file in your preferred text editor (see commands below)',
+            'This file contains your Fly.io app configuration and environment variables'
+          ],
+          copyValues: [
+            { label: 'Open fly.toml (VS Code)', value: 'code fly.toml', id: 'open-toml-code' },
+            { label: 'Open fly.toml (nano)', value: 'nano fly.toml', id: 'open-toml-nano' }
           ]
         },
         {
-          text: 'Customize these values for your relay',
+          text: 'Configure your app settings in fly.toml',
           substeps: [
-            'Change: app = "swarm-relay" to a unique app name (e.g., "swarm-relay-john" or "my-nostr-relay")',
-            'Change: RELAY_NAME = "My Swarm Relay" to your relay\'s display name',
-            'Change: RELAY_DESCRIPTION to describe your relay (what is it for?)',
-            'Mandatory: Change RELAY_PUBKEY if you want a different pubkey (or keep the default)',
-            'Leave all other values as they are'
+            'Find the line `app = "swarm-relay"` and change to a unique app name (use lowercase letters, numbers, and hyphens only)',
+            'Example: `app = "my-nostr-relay"` or `app = "johns-relay"`',
+            'This name will become part of your URL: your-app-name.fly.dev'
           ]
         },
         {
-          text: 'Save and commit your changes',
+          text: 'Configure your relay information',
           substeps: [
-            'Save the file in your editor',
-            'In your terminal, type: git add fly.toml',
-            'Type: git commit -m "Customize relay settings"',
-            'Type: git push',
-            'This uploads your customized configuration to GitHub'
+            'Find the [env] section in the file',
+            'Set RELAY_NAME = "Your Display Name" (how your relay appears to users)',
+            'Set RELAY_DESCRIPTION = "A brief description of your relay\'s purpose" (e.g., "Personal Nostr relay for friends and family")',
+            'Mandatory: Set RELAY_PUBKEY = "your-npub-hex-value" (generate with your nostr tool or keep default)',
+            'Keep all other settings (PORT, DB_ENGINE, etc.) as they are'
+          ]
+        },
+        {
+          text: 'Save and commit your fly.toml changes',
+          substeps: [
+            'Save the file in your text editor',
+            'In terminal (in swarm directory): use the commands below',
+            'Commit changes and push to GitHub',
+            'This ensures Fly.io will use your custom configuration when deploying'
+          ],
+          copyValue: {
+            label: 'Git add and commit commands',
+            value: `git add fly.toml
+git commit -m "Configure relay settings"
+git push`,
+            id: 'git-commit'
+          }
+        },
+        {
+          text: 'Set up your database connection securely',
+          substeps: [
+            'Get your Neon connection string from Step 1 (should look like postgresql://user:password@host/database)',
+            'Use the Fly.io CLI to set the DATABASE_URL secret (see command below)',
+            'Replace the example connection string with YOUR actual Neon connection string',
+            'Press Enter - you should see "Secrets are staged for the first deployment"'
+          ],
+          copyValue: {
+            label: 'Set DATABASE_URL secret',
+            value: 'flyctl secrets set DATABASE_URL=postgresql://user:password@ep-example.neon.tech/dbname',
+            id: 'flyio-secrets'
+          }
+        },
+        {
+          text: 'Verify your configuration is complete',
+          substeps: [
+            'Check your secrets are set using the command below',
+            'You should see DATABASE_URL in the output',
+            'Optional: Verify your app name is available (use the create command if needed)',
+            'You\'re now ready for deployment!'
+          ],
+          copyValues: [
+            { label: 'Verify secrets', value: 'flyctl secrets list', id: 'flyio-verify' },
+            { label: 'Create app (if needed)', value: 'flyctl apps create your-app-name', id: 'create-app' }
           ]
         }
-      ],
-      copyValues: [
-        { label: 'Git add and commit commands', value: `git add fly.toml
-git commit -m "Customize relay settings"
-git push`, id: 'git-commit' }
       ]
     },
     {
       num: 5,
-      title: 'Set Database URL Secret on Fly.io',
-      duration: '1 min',
-      videoId: 'flyio-secrets-video',
-      videoPlaceholder: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-      instructions: [
-        {
-          text: 'Use the Neon connection string you copied in Step 1',
-          substeps: [
-            'You already have your full connection string from Step 1',
-            'Example: postgresql://user:password@ep-example.neon.tech/dbname'
-          ]
-        },
-        {
-          text: 'Set the DATABASE_URL secret in Fly.io',
-          substeps: [
-            'In your terminal (in the swarm directory), use the command from the copy section',
-            'Replace postgresql://... with YOUR actual Neon connection string from Step 1',
-            'Press Enter to execute',
-            'Important: Never commit this to GitHub - Fly.io keeps it encrypted'
-          ]
-        },
-        {
-          text: 'Verify the secret was set',
-          substeps: [
-            'Type: flyctl secrets list',
-            'Press Enter',
-            'You should see DATABASE_URL listed'
-          ]
-        }
-      ],
-      copyValues: [
-        { label: 'Set DATABASE_URL secret (replace with your Neon connection string)', value: `flyctl secrets set DATABASE_URL=postgresql://user:password@ep-example.neon.tech/dbname`, id: 'flyio-secrets' },
-        { label: 'Verify secrets', value: 'flyctl secrets list', id: 'flyio-verify' }
-      ]
-    },
-    {
-      num: 6,
       title: 'Deploy to Fly.io & Test Your Relay',
       duration: '10 min',
       videoId: 'deploy-test-video',
       videoPlaceholder: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
       instructions: [
         {
-          text: 'Deploy to Fly.io',
+          text: 'Deploy your application to Fly.io',
           substeps: [
-            'Make sure you\'re in the swarm directory',
-            'Type: flyctl launch',
-            'Press Enter',
-            'Fly.io will ask to confirm app name (use the one from fly.toml)',
-            'When asked about Postgres database, select NO (you\'re using Neon)',
-            'Watch the build logs - this takes 3-5 minutes'
+            'Ensure you\'re in the swarm directory: `cd swarm`',
+            'Start deployment using the command below',
+            'Press Enter and follow the prompts:',
+            '  - App name: Press Enter to use the name from fly.toml or type a different one',
+            '  - Region: Choose a region close to you (or accept default)',
+            '  - PostgreSQL: Select NO (you\'re using Neon instead)',
+            '  - Redis: Select NO (not needed for this relay)',
+            'The deployment will begin - this typically takes 3-5 minutes'
+          ],
+          copyValue: { label: 'Deploy command', value: 'flyctl launch', id: 'flyctl-launch' }
+        },
+        {
+          text: 'Monitor the deployment process',
+          substeps: [
+            'Watch the build logs in your terminal',
+            'You\'ll see steps like: Building, Creating VM, Deploying',
+            'Success message should look like: "Visit your newly deployed app at https://your-app-name.fly.dev"',
+            'If deployment fails, note the error message and check logs with the command below'
+          ],
+          copyValues: [
+            { label: 'View logs', value: 'flyctl logs', id: 'flyctl-logs' },
+            { label: 'Redeploy (after fixes)', value: 'flyctl deploy', id: 'flyctl-deploy' }
           ]
         },
         {
-          text: 'Wait for successful deployment',
+          text: 'Test your relay is running correctly',
           substeps: [
-            'Look for the message "Deployed successfully" in the logs',
-            'Your relay URL will appear like: swarm-relay-xxx.fly.dev',
-            'Keep this URL - you\'ll need it in a moment'
-          ]
+            'Open a new browser tab and go to the URL below (replace your-app-name with your actual app name)',
+            'You should see JSON output with relay information like {"name": "Your relay name", "supported_nips": [...] }',
+            'This confirms your relay is running and connected to the Neon database',
+            'If you see errors, check logs to diagnose the issue'
+          ],
+          copyValue: { label: 'Test endpoint (replace your-app)', value: 'https://your-app-name.fly.dev/stats', id: 'test-endpoint' }
         },
         {
-          text: 'Test the relay health endpoint',
+          text: 'Connect your relay to Nostr clients',
           substeps: [
-            'Open a new browser tab',
-            'Go to: https://swarm-relay-xxx.fly.dev/stats',
-            '(Replace swarm-relay-xxx with your actual app name)',
-            'You should see JSON output with relay information',
-            'This confirms your relay is running and connected to the database'
-          ]
+            'Use the WebSocket URL below to connect to your relay',
+            'Open your preferred Nostr client (<a href="https://jumble.social" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">Jumble.social</a>, <a href="https://iris.to" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">Iris.to</a>, Amethyst, Primal, etc.)',
+            'Go to Settings → Relays → Add Relay',
+            'Enter the WebSocket URL (replace your-app-name with your actual app name)',
+            'Enable the relay and save settings',
+            'Test by posting a short note/message'
+          ],
+          copyValue: { label: 'WebSocket URL (replace your-app)', value: 'wss://your-app-name.fly.dev', id: 'ws-url' }
         },
         {
-          text: 'Add your relay to a Nostr client (Jumble.social)',
+          text: 'Verify your relay is working end-to-end',
           substeps: [
-            'Open jumble.social in your browser',
-            'Sign in with your Nostr signer extension or private key',
-            'Go to Settings (usually a gear icon)',
-            'Find the "Relays" section',
-            'Click "Add Relay" or the "+" button',
-            'Enter your relay WebSocket URL: wss://swarm-relay-xxx.fly.dev',
-            'Enable the relay and save'
-          ]
+            'Send a test post from your Nostr client',
+            'Visit <a href="https://nostr.band" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">nostr.band</a> and search for your public key',
+            'You should see your recent post appear in search results',
+            'Alternative test: Visit https://your-app-name.fly.dev to see relay status',
+            'Success! Your Nostr relay is now live and running 24/7 on Fly.io! 🎉'
+          ],
+          copyValue: { label: 'Nostr.band URL', value: 'https://nostr.band', id: 'nostr-band' }
         },
         {
-          text: 'Test by posting a note',
+          text: 'Troubleshooting common issues',
           substeps: [
-            'In Jumble.social, write a test note and publish it',
-            'Go to nostr.band and search for your pubkey',
-            'You should see your post appearing',
-            'This confirms events are being stored in your relay',
-            'Congratulations! Your relay is working! 🎉'
-          ]
+            'If app won\'t start: Run logs command to check for database connection errors',
+            'If posts don\'t appear: Verify your relay URL in Nostr client is correct (wss:// not https://)',
+            'If database errors: Check that DATABASE_URL secret was set correctly using the secrets list command',
+            'To redeploy after fixes: Use the deploy command (faster than initial launch)'
+          ],
+          copyValue: { label: 'Check secrets', value: 'flyctl secrets list', id: 'secrets-list' }
         }
-      ],
-      copyValues: [
-        { label: 'Deploy command', value: 'flyctl launch', id: 'flyctl-launch' },
-        { label: 'Test endpoint (replace xxx)', value: 'https://swarm-relay-xxx.fly.dev/stats', id: 'test-endpoint' },
-        { label: 'WebSocket URL (replace xxx)', value: 'wss://swarm-relay-xxx.fly.dev', id: 'ws-url' },
-        { label: 'Jumble.social URL', value: 'https://jumble.social', id: 'jumble-url' },
-        { label: 'Nostr.band URL (verify posts)', value: 'https://nostr.band', id: 'nostr-band' }
       ]
     }
   ];
@@ -385,7 +507,7 @@ git push`, id: 'git-commit' }
                     >
                       <div>
                         <h2 className={`text-xl font-bold ${completedSteps[step.num] ? 'text-green-400 line-through' : 'text-white'}`}>
-                          Step {step.num}: {step.title}
+                          {step.num === 0 ? '' : `Step ${step.num}: `}{step.title}
                         </h2>
                         <p className="text-sm text-slate-400">⏱️ {step.duration}</p>
                       </div>
@@ -446,44 +568,53 @@ git push`, id: 'git-commit' }
                     {step.instructions.map((instruction, idx) => (
                       <div key={idx} className="bg-slate-700/50 rounded-lg p-4 border border-slate-600">
                         <h4 className="font-semibold text-blue-300 mb-3">
-                          {idx + 1}. {instruction.text}
+                          {idx + 1}. <span dangerouslySetInnerHTML={{ __html: instruction.text }} />
                         </h4>
-                        <ul className="space-y-2 ml-4">
+                        <ul className="space-y-2 ml-4 mb-4">
                           {instruction.substeps.map((substep, subidx) => (
                             <li key={subidx} className="flex items-start space-x-2 text-slate-200 text-sm">
                               <span className="text-slate-500 font-bold mt-0.5">•</span>
-                              <span>{substep}</span>
+                              <span dangerouslySetInnerHTML={{ __html: substep }} />
                             </li>
                           ))}
                         </ul>
+
+                        {/* Inline diagram */}
+                        {instruction.diagram && (
+                          <div className="mt-4">
+                            {instruction.diagram}
+                          </div>
+                        )}
+
+                        {/* Inline copy values */}
+                        {(instruction.copyValue || instruction.copyValues) && (
+                          <div className="space-y-3">
+                            <p className="text-sm font-semibold text-slate-300">
+                              {instruction.copyValue ? 'Command' : 'Commands & Values'}
+                            </p>
+                            {(instruction.copyValue ? [instruction.copyValue] : instruction.copyValues).map((copyVal) => (
+                              <div key={copyVal.id} className="bg-slate-800 rounded-lg p-3 border border-slate-600">
+                                <div className="flex items-stretch space-x-2">
+                                  <code className="flex-1 bg-slate-900 p-2 rounded text-xs text-green-400 overflow-x-auto font-mono break-all whitespace-pre-wrap">
+                                    {copyVal.value}
+                                  </code>
+                                  <button
+                                    onClick={() => copyToClipboard(copyVal.value, copyVal.id)}
+                                    className="px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded font-semibold text-sm flex items-center space-x-2 transition flex-shrink-0"
+                                  >
+                                    <Copy size={16} />
+                                    <span>{copiedText === copyVal.id ? '✓' : 'Copy'}</span>
+                                  </button>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
 
-                  {/* Copy Values */}
-                  {step.copyValues.length > 0 && (
-                    <div className="space-y-3">
-                      <h3 className="text-lg font-bold text-white">Commands & Values</h3>
-                      {step.copyValues.map((copyVal) => (
-                        <div key={copyVal.id} className="bg-slate-700 rounded-lg p-4 border border-slate-600">
-                          <p className="text-sm font-semibold text-slate-300 mb-2">{copyVal.label}</p>
-                          <div className="flex items-stretch space-x-2">
-                            <code className="flex-1 bg-slate-900 p-3 rounded text-xs text-green-400 overflow-x-auto font-mono break-all whitespace-pre-wrap">
-                              {copyVal.value}
-                            </code>
-                            <button
-                              onClick={() => copyToClipboard(copyVal.value, copyVal.id)}
-                              className="px-4 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded font-semibold text-sm flex items-center space-x-2 transition flex-shrink-0"
-                            >
-                              <Copy size={18} />
-                              <span>{copiedText === copyVal.id ? '✓' : 'Copy'}</span>
-                            </button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                  </div>
               )}
             </div>
           ))}
