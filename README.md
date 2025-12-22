@@ -1,6 +1,6 @@
-# Deploy Your Nostr Relay
+# Deploy a Team Nostr Relay for Free
 
-**An interactive step-by-step guide for deploying a fully functional Nostr relay for $0/month forever.**
+**An interactive step-by-step guide for deploying a fully functional team Nostr relay for $0/month forever.**
 
 ---
 
@@ -9,19 +9,20 @@
 This is an interactive, self-hosted guide for deploying a **Swarm relay** (a Nostr relay built on Khatru) using **Fly.io** and **Neon DB** - completely free.
 
 By the end of this guide, you'll have:
-- ✅ A fully functional Nostr relay running 24/7
-- ✅ PostgreSQL database for event storage
+- ✅ A fully functional team Nostr relay running 24/7
+- ✅ PostgreSQL database for event storage via Neon
 - ✅ WebSocket support for Nostr clients
 - ✅ Support for text notes, reactions, long-form content, and zaps
+- ✅ User access control via nostr.json
 - ✅ Zero monthly costs ($0/month forever)
 - ✅ No credit card required
 
 ## Quick Start
 
-1. **Visit the live guide:** 
-2. **Follow the 7 steps** (takes ~20-30 minutes total)
-3. **Test with Jumble.social** or any Nostr client
-4. **Share your relay URL with friends!**
+1. **Visit the live guide:**
+2. **Follow the 6 steps** (takes ~20-30 minutes total)
+3. **Test with Jumble.social** or nostrdebug.com/query
+4. **Share your relay URL with your team!**
 
 ## Features
 
@@ -32,13 +33,12 @@ By the end of this guide, you'll have:
 - Expandable/collapsible sections
 
 ### 🎯 What You'll Set Up
+- **Step 0:** Overview & Prerequisites
 - **Step 1:** Create a free PostgreSQL database (Neon)
-- **Step 2:** Fork the Swarm relay code (GitHub)
-- **Step 3:** Clone your fork to your computer
-- **Step 4:** Install Fly.io CLI tools
-- **Step 5:** Customize Fly.io configuration
-- **Step 6:** Set database credentials
-- **Step 7:** Deploy and test your relay
+- **Step 2:** Fork and clone the Swarm repository
+- **Step 3:** Install Fly.io CLI
+- **Step 4:** Configure fly.toml and set database secrets
+- **Step 5:** Deploy and test your relay
 
 ### 💰 Zero Cost
 - Neon DB: $0/month (free tier: 3GB storage)
@@ -56,26 +56,41 @@ By the end of this guide, you'll have:
 
 ## Technology Stack
 
-- **Frontend:** React 18 + Tailwind CSS
+- **Frontend:** React 18 + Tailwind CSS + Lucide Icons
+- **Build Tool:** Vite
 - **Hosting:** GitHub Pages (free)
 - **Relay Software:** Swarm (Khatru framework)
 - **Database:** Neon (PostgreSQL)
 - **Compute:** Fly.io (free tier)
+- **Video Player:** HTML5 video with custom controls
 
 ---
 
 ## How to Use This Repository
 
+### For Users (Quick Start)
+Just visit the live deployment and follow the interactive guide:
+- **Live Guide:** https://bitkarrot.github.io/nostr-relay-setup/
+- No installation required - works in your browser
+- Complete the 6 steps to deploy your team relay
+
 ### For Developers
-If you want to contribute or modify the guide:
+If you want to contribute or modify the guide locally:
 
 ```bash
 # Clone this repository
-git clone https://github.com/YOUR_USERNAME/nostr-relay-setup.git
+git clone https://github.com/bitkarrot/nostr-relay-setup.git
 cd nostr-relay-setup
+
+# Install dependencies
+npm install
+
+# Run locally for development
+npm run dev
 
 # Edit the guide
 # - Update src/App.jsx with improvements
+# - Add videos to public/ folder
 # - Modify index.html if needed
 # - Update this README.md
 
@@ -91,10 +106,23 @@ nostr-relay-setup/
 ├── index.html              # Main HTML entry point
 ├── src/
 │   └── App.jsx             # React component (interactive guide)
+├── public/
+│   ├── neon-setup.mp4      # Step 1 video
+│   ├── step3.mp4           # Step 3 video
+│   └── step4.mp4           # Step 4 video
+│   └── step5.mp4           # Step 5 video
 ├── .nojekyll               # Tells GitHub Pages to skip Jekyll
 ├── .gitignore
+├── package.json            # Dependencies and scripts
 └── README.md               # This file
 ```
+
+### Key Features
+- **Interactive Steps:** Progress tracking with expand/collapse
+- **Video Tutorials:** Embedded videos for complex steps
+- **Copy Commands:** One-click copying of all commands
+- **Responsive Design:** Works on desktop and mobile
+- **Real-time Updates:** Live deployment with GitHub Pages
 
 ---
 
@@ -142,7 +170,9 @@ Yes, some relay operators accept donations or charge small fees. However, this g
 - **Nostr Protocol:** [nostr.com](https://nostr.com)
 - **Neon DB:** [neon.com](https://neon.com)
 - **Fly.io:** [fly.io](https://fly.io)
-- **Jumble.social:** [jumble.social](https://jumble.social) (test client)
+- **Nostr Debug Tools:** [nostrdebug.com](https://nostrdebug.com)
+- **Test Clients:** [jumble.social](https://jumble.social) | [iris.to](https://iris.to)
+- **GitHub CLI:** [docs.github.com/cli](https://docs.github.com/en/cli)
 
 ---
 
