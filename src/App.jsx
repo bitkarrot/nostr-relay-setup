@@ -290,6 +290,7 @@ export default function FlyioSetupGuide() {
       num: 4,
       title: 'Configure fly.toml and Set Database Secret',
       duration: '5 min',
+      videoSrc: '/step4.mp4',
       instructions: [
         {
           text: 'Locate and open the fly.toml configuration file',
@@ -317,6 +318,7 @@ export default function FlyioSetupGuide() {
             'Set RELAY_NAME = "Your Display Name" (how your relay appears to users)',
             'Set RELAY_DESCRIPTION = "A brief description of your relay\'s purpose" (e.g., "Personal Nostr relay for friends and family")',
             'Mandatory: Set RELAY_PUBKEY = "your-hex-public-key" (For EXAMPLE: visit <a href="https://nostrdebug.com/keys" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">nostrdebug.com/keys</a> to generate new keys, copy the public key in hex format. Note: Hex Format is the line that doesn\'t start with "npub")',
+            'Create/edit nostr.json file to add hex pubkeys of users you want to give access to your relay (see .env.example file in the <a href="https://github.com/HiveTalk/swarm" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">Swarm GitHub repository</a> for configuration details)',
             'Keep all other settings (PORT, DB_ENGINE, etc.) as they are'
           ]
         },
@@ -386,8 +388,7 @@ git push`,
       num: 5,
       title: 'Deploy to Fly.io & Test Your Relay',
       duration: '10 min',
-      videoId: 'deploy-test-video',
-      videoPlaceholder: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      videoSrc: '/step5.mp4',
       instructions: [
         {
           text: 'Deploy your application to Fly.io',
@@ -420,11 +421,11 @@ git push`,
           text: 'Test your relay is running correctly',
           substeps: [
             'Open a new browser tab and go to the URL below (replace your-app-name with your actual app name)',
-            'You should see JSON output with relay information like {"name": "Your relay name", "supported_nips": [...] }',
+            'You should see your relay information displayed on the page',
             'This confirms your relay is running and connected to the Neon database',
             'If you see errors, check logs to diagnose the issue'
           ],
-          copyValue: { label: 'Test endpoint (replace your-app)', value: 'https://your-app-name.fly.dev/stats', id: 'test-endpoint' }
+          copyValue: { label: 'Test endpoint (replace your-app)', value: 'https://your-app-name.fly.dev', id: 'test-endpoint' }
         },
         {
           text: 'Connect your relay to Nostr clients',
@@ -441,13 +442,15 @@ git push`,
         {
           text: 'Verify your relay is working end-to-end',
           substeps: [
-            'Open <a href="https://jumble.social" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">jumble.social</a> and sign in to your account',
-            'Make sure your relay is added and enabled in Settings → Relays',
-            'Create a test post (write something like "Testing my new Nostr relay!")',
-            'Publish the post and check that it appears in your timeline',
+            'Test your relay using either <a href="https://jumble.social" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">jumble.social</a> or <a href="https://nostrdebug.com/query" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">nostrdebug.com/query</a>',
+            'If using jumble.social: Sign in, add your relay in Settings → Relays, and create a test post',
+            'If using nostrdebug.com: Query for events from your public key to verify the relay is working',
             'Success! Your Nostr relay is now storing and serving events correctly! 🎉'
           ],
-          copyValue: { label: 'Jumble.social URL', value: 'https://jumble.social', id: 'jumble-url' }
+          copyValues: [
+            { label: 'Jumble.social URL', value: 'https://jumble.social', id: 'jumble-url' },
+            { label: 'Nostr Debug Query Tool', value: 'https://nostrdebug.com/query', id: 'nostr-debug-query' }
+          ]
         },
         {
           text: 'Troubleshooting common issues',
@@ -469,7 +472,7 @@ git push`,
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">
-            Deploy Your Nostr Relay
+            Deploy a Team Nostr Relay for free
           </h1>
           <p className="text-xl text-slate-300 mb-2">Setup guide for Fly.io + Neon DB</p>
           <p className="text-slate-400">Total time: ~20-30 minutes | Cost: $0/month forever</p>
