@@ -46,6 +46,7 @@
     "eslint-plugin-react-refresh": "^0.4.26",
     "jsdom": "^27.3.0",
     "prettier": "^3.7.4",
+    "sharp": "^0.34.5",
     "vite": "^7.3.0",
     "vitest": "^4.0.16"
   }
