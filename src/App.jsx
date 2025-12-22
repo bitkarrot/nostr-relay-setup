@@ -328,11 +328,12 @@ export default function FlyioSetupGuide() {
             'Save the file in your text editor',
             'In terminal (in swarm directory): use the commands below',
             'Commit changes and push to GitHub',
-            'This ensures Fly.io will use your custom configuration when deploying'
+            'This ensures Fly.io will use your custom configuration when deploying',
+            'Note: Be sure to connect your GitHub repository inside the Fly.io dashboard if you want to auto deploy on push'
           ],
           copyValue: {
             label: 'Git add and commit commands',
-            value: `git add fly.toml
+            value: `git add .
 git commit -m "Configure relay settings"
 git push`,
             id: 'git-commit'
@@ -687,6 +688,35 @@ git push`,
             <p className="text-sm text-green-200 mt-3">Ready to add media storage? Upgrade to a VPS for ~$7-10/month to enable Blossom media server.</p>
           </div>
         )}
+
+        {/* Footer */}
+        <footer className="mt-16 pt-8 border-t border-slate-700">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div className="text-center md:text-left">
+              <a
+                href="https://github.com/bitkarrot/nostr-relay-setup"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200"
+              >
+                📁 View this guide on GitHub
+              </a>
+            </div>
+            <div className="text-center">
+              <p className="text-slate-400 text-sm">
+                Made with 🥕 by{' '}
+                <a
+                  href="https://nostr.com/bitkarrot@nostr.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-orange-400 hover:text-orange-300 font-semibold underline decoration-2 decoration-orange-500/50 hover:decoration-orange-400/70 transition-all duration-200"
+                >
+                  bitkarrot
+                </a>
+              </p>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   );
