@@ -63,3 +63,5 @@ temp/
 
 # Storybook build outputs
 storybook-static/
+.vercel
+.env*.local
