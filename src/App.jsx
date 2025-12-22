@@ -234,8 +234,7 @@ export default function FlyioSetupGuide() {
       num: 3,
       title: 'Install Fly.io CLI',
       duration: '3 min',
-      videoId: 'flyctl-install-video',
-      videoPlaceholder: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      videoSrc: '/step3.mp4',
       instructions: [
         {
           text: 'Install flyctl using your preferred method',
@@ -300,7 +299,6 @@ export default function FlyioSetupGuide() {
             'This file contains your Fly.io app configuration and environment variables'
           ],
           copyValues: [
-            { label: 'Open fly.toml (VS Code)', value: 'code fly.toml', id: 'open-toml-code' },
             { label: 'Open fly.toml (nano)', value: 'nano fly.toml', id: 'open-toml-nano' }
           ]
         },
@@ -318,7 +316,7 @@ export default function FlyioSetupGuide() {
             'Find the [env] section in the file',
             'Set RELAY_NAME = "Your Display Name" (how your relay appears to users)',
             'Set RELAY_DESCRIPTION = "A brief description of your relay\'s purpose" (e.g., "Personal Nostr relay for friends and family")',
-            'Mandatory: Set RELAY_PUBKEY = "your-npub-hex-value" (generate with your nostr tool or keep default)',
+            'Mandatory: Set RELAY_PUBKEY = "your-hex-public-key" (For EXAMPLE: visit <a href="https://nostrdebug.com/keys" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">nostrdebug.com/keys</a> to generate new keys, copy the public key in hex format. Note: Hex Format is the line that doesn\'t start with "npub")',
             'Keep all other settings (PORT, DB_ENGINE, etc.) as they are'
           ]
         },
@@ -339,16 +337,32 @@ git push`,
           }
         },
         {
+          text: 'Create your Fly.io app first',
+          substeps: [
+            'You MUST create the app on Fly.io before setting secrets',
+            'Use the app name you configured in fly.toml (replace with your actual app name)',
+            'This creates the app container but doesn\'t deploy yet',
+            'Once the app exists, you can set environment variables and secrets'
+          ],
+          copyValue: {
+            label: 'Create Fly.io app',
+            value: 'flyctl apps create your-app-name',
+            id: 'create-fly-app'
+          }
+        },
+        {
           text: 'Set up your database connection securely',
           substeps: [
             'Get your Neon connection string from Step 1 (should look like postgresql://user:password@host/database)',
+            'Add ?sslmode=disable to the end if not present (required for Fly.io)',
             'Use the Fly.io CLI to set the DATABASE_URL secret (see command below)',
+            '<strong style="color: #ef4444;">BE SURE TO ENCLOSE THE DATABASE_URL SECRET with QUOTES on both ends ("....")</strong>',
             'Replace the example connection string with YOUR actual Neon connection string',
             'Press Enter - you should see "Secrets are staged for the first deployment"'
           ],
           copyValue: {
             label: 'Set DATABASE_URL secret',
-            value: 'flyctl secrets set DATABASE_URL=postgresql://user:password@ep-example.neon.tech/dbname',
+            value: 'flyctl secrets set DATABASE_URL="postgresql://user:password@host:5432/dbname?sslmode=disable"',
             id: 'flyio-secrets'
           }
         },
@@ -357,13 +371,14 @@ git push`,
           substeps: [
             'Check your secrets are set using the command below',
             'You should see DATABASE_URL in the output',
-            'Optional: Verify your app name is available (use the create command if needed)',
-            'You\'re now ready for deployment!'
+            'Your app should now be ready for deployment with database connection',
+            'You\'re now ready for Step 5: Deploy to Fly.io!'
           ],
-          copyValues: [
-            { label: 'Verify secrets', value: 'flyctl secrets list', id: 'flyio-verify' },
-            { label: 'Create app (if needed)', value: 'flyctl apps create your-app-name', id: 'create-app' }
-          ]
+          copyValue: {
+            label: 'Verify secrets',
+            value: 'flyctl secrets list',
+            id: 'flyio-verify'
+          }
         }
       ]
     },
@@ -426,13 +441,13 @@ git push`,
         {
           text: 'Verify your relay is working end-to-end',
           substeps: [
-            'Send a test post from your Nostr client',
-            'Visit <a href="https://nostr.band" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">nostr.band</a> and search for your public key',
-            'You should see your recent post appear in search results',
-            'Alternative test: Visit https://your-app-name.fly.dev to see relay status',
-            'Success! Your Nostr relay is now live and running 24/7 on Fly.io! 🎉'
+            'Open <a href="https://jumble.social" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">jumble.social</a> and sign in to your account',
+            'Make sure your relay is added and enabled in Settings → Relays',
+            'Create a test post (write something like "Testing my new Nostr relay!")',
+            'Publish the post and check that it appears in your timeline',
+            'Success! Your Nostr relay is now storing and serving events correctly! 🎉'
           ],
-          copyValue: { label: 'Nostr.band URL', value: 'https://nostr.band', id: 'nostr-band' }
+          copyValue: { label: 'Jumble.social URL', value: 'https://jumble.social', id: 'jumble-url' }
         },
         {
           text: 'Troubleshooting common issues',
