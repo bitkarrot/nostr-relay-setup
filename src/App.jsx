@@ -207,9 +207,9 @@ export default function FlyioSetupGuide() {
       videoSrc: '/neon-setup.mp4',
       instructions: [
         {
-          text: 'Go to <a href="https://neon.com" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">neon.com</a> and sign up (free account, no credit card)',
+          text: 'Go to <a href="https://neon.com" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">neon.com</a> and sign up (free account, no credit card)',
           substeps: [
-            'Navigate to <a href="https://neon.com" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">neon.com</a>',
+            'Navigate to <a href="https://neon.com" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">neon.com</a>',
             'Click "Sign Up" in the top right',
             'Follow the signup process',
           ],
@@ -246,7 +246,7 @@ export default function FlyioSetupGuide() {
         {
           text: 'Navigate to the Swarm repository',
           substeps: [
-            'Go to <a href="https://github.com/HiveTalk/swarm" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">github.com/HiveTalk/swarm</a>',
+            'Go to <a href="https://github.com/HiveTalk/swarm" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">github.com/HiveTalk/swarm</a>',
             "You'll see the Swarm relay code (a khatru relay fork)",
           ],
           copyValue: {
@@ -319,9 +319,9 @@ export default function FlyioSetupGuide() {
         {
           text: 'Install flyctl using your preferred method',
           substeps: [
-            'Mac: Run `brew install flyctl` (recommended) or visit <a href="https://fly.io/docs/hands-on/install-flyctl/" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">fly.io/docs/hands-on/install-flyctl/</a>',
-            'Windows: Run `winget install --id SuperFly.FlyCTL` or download from <a href="https://fly.io/docs/hands-on/install-flyctl/" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">fly.io/docs/hands-on/install-flyctl/</a>',
-            'Linux: Run `curl -L https://fly.io/install.sh | sh` or visit <a href="https://fly.io/docs/hands-on/install-flyctl/" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">fly.io/docs/hands-on/install-flyctl/</a>',
+            'Mac: Run `brew install flyctl` (recommended) or visit <a href="https://fly.io/docs/hands-on/install-flyctl/" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">fly.io/docs/hands-on/install-flyctl/</a>',
+            'Windows: Run `winget install --id SuperFly.FlyCTL` or download from <a href="https://fly.io/docs/hands-on/install-flyctl/" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">fly.io/docs/hands-on/install-flyctl/</a>',
+            'Linux: Run `curl -L https://fly.io/install.sh | sh` or visit <a href="https://fly.io/docs/hands-on/install-flyctl/" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">fly.io/docs/hands-on/install-flyctl/</a>',
             'For all systems: Follow the installation prompts and accept any permissions requested',
           ],
           copyValues: [
@@ -429,9 +429,9 @@ export default function FlyioSetupGuide() {
             'Find the [env] section in the file',
             'Set RELAY_NAME = "Your Display Name" (how your relay appears to users)',
             'Set RELAY_DESCRIPTION = "A brief description of your relay\'s purpose" (e.g., "Personal Nostr relay for friends and family")',
-            'Mandatory: Set RELAY_PUBKEY = "your-hex-public-key" (For EXAMPLE: visit <a href="https://nostrdebug.com/keys" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">nostrdebug.com/keys</a> to generate new keys, copy the public key in hex format. Note: Hex Format is the line that doesn\'t start with "npub")',
-            'Set NPUB_DOMAIN = "yourdomain.com" (the domain that hosts your .well-known/nostr.json file). We recommend hosting nostr.json on your own domain instead of configuring it inside the swarm public directory. For instructions on how to configure a nostr.json for free with a domain on GitHub, visit <a href="https://github.com/bitkarrot/bitkarrot.github.io" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">this example repo</a> or <a href="https://gist.github.com/bitkarrot/f28fe68d6f4ffbb7f79909cd3d070bac" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">this gist</a>',
-            'Create/edit nostr.json file to add hex pubkeys of users you want to give access to your relay (see .env.example file in the <a href="https://github.com/HiveTalk/swarm" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">Swarm GitHub repository</a> for configuration details)',
+            'Mandatory: Set RELAY_PUBKEY = "your-hex-public-key" (For EXAMPLE: visit <a href="https://nostrdebug.com/keys" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">nostrdebug.com/keys</a> to generate new keys, copy the public key in hex format. Note: Hex Format is the line that doesn\'t start with "npub")',
+            'Set NPUB_DOMAIN = "yourdomain.com" (the domain that hosts your .well-known/nostr.json file). We recommend hosting nostr.json on your own domain instead of configuring it inside the swarm public directory. For instructions on how to configure a nostr.json for free with a domain on GitHub, visit <a href="https://github.com/bitkarrot/bitkarrot.github.io" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">this example repo</a> or <a href="https://gist.github.com/bitkarrot/f28fe68d6f4ffbb7f79909cd3d070bac" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">this gist</a>',
+            'Optionally: Create/edit nostr.json file to add hex pubkeys of users you want to give access to your relay (see .env.example file in the <a href="https://github.com/HiveTalk/swarm" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">Swarm GitHub repository</a> for configuration details)',
             'Keep all other settings (PORT, DB_ENGINE, etc.) as they are',
           ],
           copyValue: {
@@ -564,7 +564,7 @@ git push`,
           text: 'Connect your relay to Nostr clients',
           substeps: [
             'Use the WebSocket URL below to connect to your relay',
-            'Open your preferred Nostr client (<a href="https://jumble.social" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">Jumble.social</a>, <a href="https://iris.to" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">Iris.to</a>, Amethyst, Primal, etc.)',
+            'Open your preferred Nostr client (<a href="https://jumble.social" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">Jumble.social</a>, <a href="https://iris.to" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">Iris.to</a>, Amethyst, Primal, etc.)',
             'Go to Settings → Relays → Add Relay',
             'Enter the WebSocket URL (replace your-app-name with your actual app name)',
             'Enable the relay and save settings',
@@ -579,7 +579,7 @@ git push`,
         {
           text: 'Verify your relay is working end-to-end',
           substeps: [
-            'Test your relay using either <a href="https://jumble.social" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">jumble.social</a> or <a href="https://nostrdebug.com/query" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">nostrdebug.com/query</a>',
+            'Test your relay using either <a href="https://jumble.social" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">jumble.social</a> or <a href="https://nostrdebug.com/query" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">nostrdebug.com/query</a>',
             'If using jumble.social: Sign in, add your relay in Settings → Relays, and create a test post',
             'If using nostrdebug.com: Query for events from your public key to verify the relay is working',
             'Success! Your Nostr relay is now storing and serving events correctly! 🎉',
