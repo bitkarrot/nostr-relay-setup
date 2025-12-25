@@ -430,9 +430,16 @@ export default function FlyioSetupGuide() {
             'Set RELAY_NAME = "Your Display Name" (how your relay appears to users)',
             'Set RELAY_DESCRIPTION = "A brief description of your relay\'s purpose" (e.g., "Personal Nostr relay for friends and family")',
             'Mandatory: Set RELAY_PUBKEY = "your-hex-public-key" (For EXAMPLE: visit <a href="https://nostrdebug.com/keys" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">nostrdebug.com/keys</a> to generate new keys, copy the public key in hex format. Note: Hex Format is the line that doesn\'t start with "npub")',
+            'Set NPUB_DOMAIN = "yourdomain.com" (the domain that hosts your .well-known/nostr.json file). We recommend hosting nostr.json on your own domain instead of configuring it inside the swarm public directory. For instructions on how to configure a nostr.json for free with a domain on GitHub, visit <a href="https://github.com/bitkarrot/bitkarrot.github.io" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">this example repo</a> or <a href="https://gist.github.com/bitkarrot/f28fe68d6f4ffbb7f79909cd3d070bac" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">this gist</a>',
             'Create/edit nostr.json file to add hex pubkeys of users you want to give access to your relay (see .env.example file in the <a href="https://github.com/HiveTalk/swarm" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 font-semibold underline decoration-2 decoration-cyan-500/50 hover:decoration-cyan-400/70 transition-all duration-200">Swarm GitHub repository</a> for configuration details)',
             'Keep all other settings (PORT, DB_ENGINE, etc.) as they are',
           ],
+          copyValue: {
+            label: 'Example NPUB_DOMAIN setting',
+            value:
+              'NPUB_DOMAIN="hivetalk.org" # Domain that hosts .well-known/nostr.json',
+            id: 'npub-domain',
+          },
         },
         {
           text: 'Save and commit your fly.toml changes',
